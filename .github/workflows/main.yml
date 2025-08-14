@@ -1,0 +1,165 @@
+name: Basic Commands 
+
+ 
+
+on: 
+
+  push: 
+
+    branches: 
+
+      - main 
+
+  schedule: 
+
+    - cron: "0 0 * * *" # Every day at midnight UTC 
+
+  workflow_dispatch: # Manual trigger 
+
+ 
+
+jobs: 
+
+  demo-commands: 
+
+    runs-on: ubuntu-latest 
+
+ 
+
+    steps: 
+
+      - name: Show current working directory 
+
+        run: pwd 
+
+ 
+
+      - name: List files in the directory 
+
+        run: ls -la 
+
+ 
+
+      - name: Print today's date 
+
+        run: date 
+
+ 
+
+      - name: Create and display a text file 
+
+        run: | 
+
+          echo "This is a demo file" > demo.txt 
+
+          cat demo.txt 
+
+ 
+
+      - name: Run Python program 
+
+        run: | 
+
+          echo 'print("Hello from Python!")' > hello.py 
+
+          python3 hello.py 
+
+  
+
+
+
+name: Run Java and Python Programs 
+
+ 
+
+on: 
+
+  push: 
+
+    branches: 
+
+      - main 
+
+ 
+
+jobs: 
+
+  run-all: 
+
+    runs-on: ubuntu-latest 
+
+ 
+
+    steps: 
+
+      # Checkout repository code 
+
+      - name: Checkout code 
+
+        uses: actions/checkout@v4 
+
+ 
+
+      # Set up Java 17 
+
+      - name: Set up Java 
+
+        uses: actions/setup-java@v4 
+
+        with: 
+
+          distribution: 'temurin' 
+
+          java-version: '17' 
+
+ 
+
+      # Compile both Java files 
+
+      - name: Compile Java Programs 
+
+        run: javac ProgramOne.java ProgramTwo.java 
+
+ 
+
+      # Run first Java program 
+
+      - name: Run ProgramOne 
+
+        run: java ProgramOne 
+
+ 
+
+      # Run second Java program 
+
+      - name: Run ProgramTwo 
+
+        run: java ProgramTwo 
+
+ 
+
+      # Set up Python 
+
+      - name: Set up Python 
+
+        uses: actions/setup-python@v5 
+
+        with: 
+
+          python-version: '3.10' 
+
+ 
+
+      # Run first Python script 
+
+      - name: Run script_one.py 
+
+        run: python script_one.py 
+
+ 
+
+      # Run second Python script 
+
+      - name: Run script_two.py 
+
+        run: python script_two.py
